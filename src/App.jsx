@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import { useState } from "react";
+import "./styles.css";
+
 import Message from "./components/Message";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -15,20 +17,23 @@ export default function App() {
 
   const [verified, setVerified] = useState(undefined);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUserInput((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
 
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page refresh
-    const { charOne, charTwo, charThree, charFour } = userInput;
-    const enteredCode = charOne + charTwo + charThree + charFour;
-    setVerified(enteredCode === passCode);
-  };
+const handleChange = (e) => {
+  const { name } = e.target;
+  setUserInput((prevState) => ({
+    ...prevState,
+    [name]: e.target.value
+  }));
+};
+
+
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const { charOne, charTwo, charThree, charFour } = userInput;
+  const enteredCode = charOne + charTwo + charThree + charFour;
+  setVerified(enteredCode === passCode);
+}
 
 
   return (
@@ -39,7 +44,7 @@ export default function App() {
         <Message status={verified} />
 
         <div>
-          <input
+        <input
             required
             type="password"
             name="charOne"
@@ -81,5 +86,5 @@ export default function App() {
       <Footer />
     </div>
   );
-}
 
+  }
